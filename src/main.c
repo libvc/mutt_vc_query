@@ -16,7 +16,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  *
- * $Id: main.c,v 1.2 2003/05/13 12:43:28 ahsu Exp $
+ * $Id: main.c,v 1.3 2003/05/14 02:47:13 ahsu Exp $
  */
 
 #include <limits.h>
@@ -42,6 +42,7 @@ static void display_usage (const char *prog_name);
 
 char *query_string = NULL;
 char datafile[PATH_MAX];
+char *misc_field = NULL;
 int sort_by = 0;
 
 /***************************************************************************
@@ -95,7 +96,8 @@ display_license ()
 static void
 display_usage (const char *prog_name)
 {
-  printf ("usage: %s [-e|-m] [-f <file>] query_string\n", prog_name);
+  printf ("usage: %s [-e|-m] [-t <type>] [-f <file>] query_string\n",
+          prog_name);
   printf ("       %s -v\n", prog_name);
   printf ("       %s -V\n", prog_name);
   printf ("       %s -h\n", prog_name);
@@ -103,6 +105,7 @@ display_usage (const char *prog_name)
   printf ("  -e            sort results by email\n");
   printf ("  -m            sort results by misc\n");
   printf ("  -f <file>     specify a data file to use\n");
+  printf ("  -t <type>     the type to use for the misc field\n");
   printf ("  -v            display version\n");
   printf ("  -V            display copyright and license\n");
   printf ("  -h            this help message\n");
@@ -117,7 +120,7 @@ process_command_line_args (int argc, char *const *argv)
 {
   int ch = -1;
 
-  while (-1 != (ch = getopt (argc, argv, "f:mevVh")))
+  while (-1 != (ch = getopt (argc, argv, "f:met:vVh")))
     {
       switch (ch)
         {
@@ -129,6 +132,9 @@ process_command_line_args (int argc, char *const *argv)
           break;
         case 'e':
           sort_by = SORT_RESULTS_BY_EMAIL;
+          break;
+        case 't':
+          misc_field = strdup (optarg);
           break;
         case 'v':
           display_version ();
@@ -201,7 +207,7 @@ main (int argc, char *argv[])
     }
 
   printf ("Searching database ... ");
-  get_results (fp, query_string, &searched, results, &rc);
+  get_results (fp, query_string, misc_field, &searched, results, &rc);
 
   if (0 == rc)
     {

@@ -16,7 +16,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  *
- * $Id: result.c,v 1.1 2003/05/13 09:45:15 ahsu Exp $
+ * $Id: result.c,v 1.2 2003/05/13 12:43:28 ahsu Exp $
  */
 
 #include "result.h"
@@ -64,8 +64,8 @@ create_query_result ()
  */
 
 void
-get_results (FILE * fp, const char *query_string, int *searched,
-             query_result * results, int *rc)
+get_results (FILE * fp, const char *query_string, const char *misc_field,
+             int *searched, query_result * results, int *rc)
 {
   vc_component *v = NULL;
   char *s_result = NULL;
@@ -74,7 +74,7 @@ get_results (FILE * fp, const char *query_string, int *searched,
   char *name = NULL;
   char *misc = NULL;
   vc_component *fn = NULL;
-  vc_component *adr = NULL;
+  vc_component *tmp_vc = NULL;
 
   r = results;
   *rc = 0;
@@ -88,8 +88,16 @@ get_results (FILE * fp, const char *query_string, int *searched,
 
       if (NULL != name && NULL != email)
         {
-          adr = vc_get_next_by_name (v, VC_ADDRESS);
-          misc = get_val_struct_part (vc_get_value (adr), ADR_LOCALITY);
+          if (NULL == misc_field)
+            {
+              tmp_vc = vc_get_next_by_name (v, VC_ADDRESS);
+              misc = get_val_struct_part (vc_get_value (tmp_vc), ADR_LOCALITY);
+            }
+          else
+            {
+              tmp_vc = vc_get_next_by_name (v, misc_field);
+              misc = vc_get_value (tmp_vc);
+            }
           misc = misc ? misc : " ";
 
           if (strstr (name, query_string) || strstr (email, query_string)

@@ -16,7 +16,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  *
- * $Id$
+ * $Id: result.h,v 1.1 2003/05/13 09:45:15 ahsu Exp $
  */
 
 #include <stdio.h>
@@ -28,8 +28,8 @@ enum sort_results_by
 
 /*** PROTOTYPES ***/
 query_result *create_query_result ();
-void get_results (FILE * fp, const char *query_string, int *searched,
-                  query_result * results, int *rc);
+void get_results (FILE * fp, const char *query_string, const char *misc_field,
+                  int *searched, query_result * results, int *rc);
 void print_results (const query_result * results);
 void sort_results (query_result * results, int n, int sort_by);
 query_result *last_result (query_result * results);
