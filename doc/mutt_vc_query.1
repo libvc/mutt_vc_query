@@ -1,6 +1,6 @@
 .\" Process this file with
 .\" groff -man -Tascii mutt_vc_query.1
-.\" $Id: mutt_vc_query.1,v 1.2 2003/05/14 02:36:31 ahsu Exp $
+.\" $Id: mutt_vc_query.1,v 1.3 2003/05/14 02:50:07 ahsu Exp $
 .Dd May 14, 2003
 .Os
 .Dt MUTT_VC_QUERY 1
@@ -13,6 +13,7 @@
 .Fl m |
 .Fl e
 .Oc
+.Op Fl t Ar type
 .Op Fl f Ar datafile
 .Ar query
 .Nm mutt_vc_query
@@ -34,6 +35,8 @@ Use the datafile to perform the query.
 Display usage help.
 .It -m
 Sort the results by the miscellaneous field.
+.It -t
+Uses the specified type for the miscellaneous field.
 .It -v
 Display the version.
 .It -V
@@ -44,6 +47,12 @@ Display the copyright and license.
 .It Pa ~/.rolo/contacts.vcf
 Default data file that mutt_vc_query will query.
 .El
+.Sh EXAMPLES
+To query for the string ``Hsu'' and have the miscellaneous field
+be populated by the ``NICKNAME'' type:
+.Dl mutt_vc_query -t NICKNAME Hsu
+.Sh DIAGNOSTICS
+.Ex -std mutt_vc_query
 .Sh SEE ALSO
 .Xr muttrc 5 ,
 .Xr rolo 1
