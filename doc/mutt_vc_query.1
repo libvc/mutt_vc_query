@@ -1,6 +1,6 @@
 .\" Process this file with
 .\" groff -man -Tascii mutt_vc_query.1
-.\" $Id: mutt_vc_query.1,v 1.4 2003/05/14 04:01:23 ahsu Rel $
+.\" $Id: mutt_vc_query.1,v 1.5 2003/05/19 00:31:23 ahsu Exp $
 .Dd May 14, 2003
 .Os
 .Dt MUTT_VC_QUERY 1
@@ -28,8 +28,10 @@ shell prompt to perform ad-hoc queries, but it is meant to be used
 by mutt's
 .Qo query_command Qc option.  Place the following line in your
 .Qo ~/.muttrc Qc file:
+.Pp
 .Dl set query_command = Qo mutt_vc_query '%s' Qc
 .Pp
+The search using the given query string will be case insensitive.
 The options are as follows:
 .Bl -tag -offset indent -width "-V"
 .It -e
@@ -56,6 +58,7 @@ Default data file that mutt_vc_query will query.
 To query for the string
 .Qo Hsu Qc and have the miscellaneous field be populated by the type
 .Qo NICKNAME Qc :
+.Pp
 .Dl mutt_vc_query -t NICKNAME Hsu
 .Sh DIAGNOSTICS
 .Ex -std mutt_vc_query
