@@ -1,5 +1,5 @@
 # RPM spec file for Red Hat Linux
-# $Id: mutt_vc_query.spec,v 1.1 2003/05/18 23:14:50 ahsu Exp $
+# $Id: mutt_vc_query.spec,v 1.2 2003/05/19 00:49:28 ahsu Exp $
 Summary: A vCard query utility for mutt.
 Name: mutt_vc_query
 Version: 002
@@ -38,4 +38,4 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(-,root,root)
 %{_bindir}/*
 %{_mandir}/man1/*
-%doc AUTHORS COPYING ChangeLog INSTALL NEWS README THANKS
+%doc AUTHORS COPYING ChangeLog INSTALL NEWS README THANKS TODO
