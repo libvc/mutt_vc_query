@@ -1,0 +1,8 @@
+* Have the type option parse a format that can specify the value
+struct to retrieve.  For example:
+
+    mutt_vc_query -t ADR:6 hsu
+
+should set the misc field to the country field of the ADR type.
+The 6 corresponds to the 6th field (index beginning at 0) of the
+ADR type.
