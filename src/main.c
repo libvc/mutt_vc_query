@@ -1,22 +1,23 @@
 /*
- * mutt_vc_query - vCard query utility for mutt
- * Copyright (C) 2003  Andrew Hsu
+ *  mutt_vc_query - vCard query utility for mutt
+ *  Copyright (C) 2003  Andrew Hsu
  * 
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2 of the License, or
- * (at your option) any later version.
+ *  This program is free software; you can redistribute it and/or
+ *  modify it under the terms of the GNU General Public License as
+ *  published by the Free Software Foundation; either version 2 of
+ *  the License, or (at your option) any later version.
  *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
  *
- * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program; if not, write to the Free Software
+ *  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA
+ *  02111-1307  USA
  *
- * $Id: main.c,v 1.4 2003/05/14 03:41:02 ahsu Exp $
+ *  $Id: main.c,v 1.5 2003/05/14 22:47:04 ahsu Exp $
  */
 
 #include <limits.h>
@@ -35,15 +36,92 @@
 #define DEFAULT_HOME_ROLO_DIR ".rolo"
 #define DEFAULT_FILENAME "contacts.vcf"
 
+static void set_defaults ();
 static void process_command_line_args (int argc, char *const *argv);
+static void display_usage (const char *prog_name);
 static void display_version ();
 static void display_license ();
-static void display_usage (const char *prog_name);
 
 char *query_string = NULL;
 char datafile[PATH_MAX];
 char *misc_field = NULL;
 int sort_by = 0;
+
+/***************************************************************************
+    Sets the default settings.
+ */
+
+static void
+set_defaults ()
+{
+  char *home = NULL;
+
+  home = getenv ("HOME");
+  strcpy (datafile, home);
+  strncat (datafile, "/", 1);
+  strncat (datafile, DEFAULT_HOME_ROLO_DIR, strlen (DEFAULT_HOME_ROLO_DIR));
+  strncat (datafile, "/", 1);
+  strncat (datafile, DEFAULT_FILENAME, strlen (DEFAULT_FILENAME));
+
+  sort_by = SORT_RESULTS_BY_NAME;
+}
+
+/***************************************************************************
+    Parses the command-line arguments.
+ */
+
+static void
+process_command_line_args (int argc, char *const *argv)
+{
+  int ch = -1;
+  char *progname = NULL;
+
+  progname = argv[0];
+
+  while (-1 != (ch = getopt (argc, argv, "f:met:vVh")))
+    {
+      switch (ch)
+        {
+        case 'f':
+          strcpy (datafile, optarg);
+          break;
+        case 'm':
+          sort_by = SORT_RESULTS_BY_MISC;
+          break;
+        case 'e':
+          sort_by = SORT_RESULTS_BY_EMAIL;
+          break;
+        case 't':
+          misc_field = strdup (optarg);
+          break;
+        case 'v':
+          display_version ();
+          exit (0);
+          break;
+        case 'V':
+          display_license ();
+          exit (0);
+          break;
+        case 'h':
+        case '?':
+        default:
+          display_usage (progname);
+          exit (0);
+        }
+    }
+
+  argc -= optind;
+  argv += optind;
+
+  if (1 != argc)
+    {
+      fprintf (stderr, "Invalid number of arguments.\n");
+      display_usage (progname);
+      exit (1);
+    }
+
+  query_string = argv[0];
+}
 
 /***************************************************************************
     Outputs a one-line version statement.
@@ -112,81 +190,7 @@ display_usage (const char *prog_name)
 }
 
 /***************************************************************************
-    Parses the command-line arguments.
- */
-
-static void
-process_command_line_args (int argc, char *const *argv)
-{
-  int ch = -1;
-  char *progname = NULL;
-
-  progname = argv[0];
-
-  while (-1 != (ch = getopt (argc, argv, "f:met:vVh")))
-    {
-      switch (ch)
-        {
-        case 'f':
-          strcpy (datafile, optarg);
-          break;
-        case 'm':
-          sort_by = SORT_RESULTS_BY_MISC;
-          break;
-        case 'e':
-          sort_by = SORT_RESULTS_BY_EMAIL;
-          break;
-        case 't':
-          misc_field = strdup (optarg);
-          break;
-        case 'v':
-          display_version ();
-          exit (0);
-          break;
-        case 'V':
-          display_license ();
-          exit (0);
-          break;
-        case 'h':
-        case '?':
-        default:
-          display_usage (progname);
-          exit (0);
-        }
-    }
-
-  argc -= optind;
-  argv += optind;
-
-  if (1 != argc)
-    {
-      fprintf (stderr, "Invalid number of arguments.\n");
-      display_usage (progname);
-      exit (1);
-    }
-
-  query_string = argv[0];
-}
-
-/***************************************************************************
- */
-
-static void
-set_defaults ()
-{
-  char *home = NULL;
-
-  home = getenv ("HOME");
-  strcpy (datafile, home);
-  strncat (datafile, "/", 1);
-  strncat (datafile, DEFAULT_HOME_ROLO_DIR, strlen (DEFAULT_HOME_ROLO_DIR));
-  strncat (datafile, "/", 1);
-  strncat (datafile, DEFAULT_FILENAME, strlen (DEFAULT_FILENAME));
-
-  sort_by = SORT_RESULTS_BY_NAME;
-}
-
-/***************************************************************************
+    The main function.
  */
 
 int
@@ -214,11 +218,13 @@ main (int argc, char *argv[])
 
   if (0 == rc)
     {
+      /* the query produced no results */
       printf ("no matches found.\n");
       ret_val = 1;
     }
   else
     {
+      /* success in finding matches for the query */
       printf ("%i entries ... ", searched);
       printf ("%i matching.\n", rc);
       sort_results (results, rc, sort_by);
