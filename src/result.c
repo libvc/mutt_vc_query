@@ -16,13 +16,13 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  *
- * $Id$
+ * $Id: result.c,v 1.1 2003/05/13 09:45:15 ahsu Exp $
  */
 
 #include "result.h"
 #include <stdlib.h>
 #include <string.h>
-#include <vcard.h>
+#include <vc.h>
 
 struct query_result_tag
 {
@@ -67,14 +67,14 @@ void
 get_results (FILE * fp, const char *query_string, int *searched,
              query_result * results, int *rc)
 {
-  vcard_component *v = NULL;
+  vc_component *v = NULL;
   char *s_result = NULL;
   query_result *r = NULL;
   char *email = NULL;
   char *name = NULL;
   char *misc = NULL;
-  vcard_component *fn = NULL;
-  vcard_component *adr = NULL;
+  vc_component *fn = NULL;
+  vc_component *adr = NULL;
 
   r = results;
   *rc = 0;

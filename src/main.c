@@ -16,7 +16,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  *
- * $Id$
+ * $Id: main.c,v 1.1 2003/05/13 09:42:14 ahsu Exp $
  */
 
 #include <limits.h>
@@ -25,7 +25,6 @@
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
-#include <vcard.h>
 
 #if HAVE_CONFIG_H
 #include "config.h"
