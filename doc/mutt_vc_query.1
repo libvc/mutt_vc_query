@@ -1,7 +1,7 @@
 .\" Process this file with
 .\" groff -man -Tascii mutt_vc_query.1
-.\" $Id: mutt_vc_query.1,v 1.1 2003/05/13 11:23:34 ahsu Exp $
-.Dd May 13, 2003
+.\" $Id: mutt_vc_query.1,v 1.2 2003/05/14 02:36:31 ahsu Exp $
+.Dd May 14, 2003
 .Os
 .Dt MUTT_VC_QUERY 1
 .Sh NAME
@@ -19,17 +19,21 @@
 .Op Fl v
 .Nm mutt_vc_query
 .Op Fl V
+.Nm mutt_vc_query
+.Op Fl h
 .Sh DESCRIPTION
 A vCard query utility for mutt.
 .Pp
 The options are as follows:
 .Bl -tag -offset indent -width "-V"
-.It -m
-Sort the results by the miscellaneous field.
 .It -e
 Sort the results by email.
 .It -f
 Use the datafile to perform the query.
+.It -h
+Display usage help.
+.It -m
+Sort the results by the miscellaneous field.
 .It -v
 Display the version.
 .It -V
