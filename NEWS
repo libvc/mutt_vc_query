@@ -1,3 +1,11 @@
+mutt_vc_query 002 (2003-05-19)
+
+* Updated the man page.
+
+* Fixed the output of `mutt_vc_query -h' so that it displays properly.
+
+* Queries are now performed as a case insensitive search.
+
 mutt_vc_query 001 (2003-05-14)
 
 * Initial release.  This is the same query_command utility that was
