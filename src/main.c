@@ -16,7 +16,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  *
- * $Id: main.c,v 1.3 2003/05/14 02:47:13 ahsu Exp $
+ * $Id: main.c,v 1.4 2003/05/14 03:41:02 ahsu Exp $
  */
 
 #include <limits.h>
@@ -119,6 +119,9 @@ static void
 process_command_line_args (int argc, char *const *argv)
 {
   int ch = -1;
+  char *progname = NULL;
+
+  progname = argv[0];
 
   while (-1 != (ch = getopt (argc, argv, "f:met:vVh")))
     {
@@ -147,7 +150,7 @@ process_command_line_args (int argc, char *const *argv)
         case 'h':
         case '?':
         default:
-          display_usage (argv[0]);
+          display_usage (progname);
           exit (0);
         }
     }
@@ -158,7 +161,7 @@ process_command_line_args (int argc, char *const *argv)
   if (1 != argc)
     {
       fprintf (stderr, "Invalid number of arguments.\n");
-      display_usage (argv[0]);
+      display_usage (progname);
       exit (1);
     }
 
