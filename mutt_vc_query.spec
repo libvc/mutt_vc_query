@@ -1,7 +1,8 @@
+# RPM spec file for Red Hat Linux
 # $Id$
 Summary: A vCard query utility for mutt.
 Name: mutt_vc_query
-Version: 001
+Version: 002
 Release: 1
 Source: http://osdn.dl.sourceforge.net/sourceforge/rolo/%{name}-%{version}.tar.gz
 License: GPL
