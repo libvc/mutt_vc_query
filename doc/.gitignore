@@ -1,0 +1,5 @@
+*core
+*~
+*.swp
+Makefile
+Makefile.in

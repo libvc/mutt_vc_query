@@ -1,0 +1,7 @@
+*core
+*~
+*.swp
+.deps
+Makefile
+Makefile.in
+mutt_vc_query
