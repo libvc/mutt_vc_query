@@ -16,7 +16,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  *
- * $Id: main.c,v 1.1 2003/05/13 09:42:14 ahsu Exp $
+ * $Id: main.c,v 1.2 2003/05/13 12:43:28 ahsu Exp $
  */
 
 #include <limits.h>
@@ -61,7 +61,7 @@ display_version ()
 static void
 display_license ()
 {
-  printf ("vc_query - query utility for vCard files\n");
+  printf ("mutt_vc_query - vCard query utility for mutt\n");
   printf ("Copyright (C) 2003  Andrew Hsu\n");
   printf ("\n");
   printf ("This program is free software;");
