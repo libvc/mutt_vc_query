@@ -1,17 +1,19 @@
 # Process this file with autoconf to produce a configure script.
-# $Id$
+# $Id: configure.ac,v 1.1 2003/05/13 11:36:46 ahsu Exp $
 
 AC_INIT(mutt_vc_query, 001, ahsu@users.sf.net)
 AM_INIT_AUTOMAKE
 AC_PREREQ(2.57)
 AC_COPYRIGHT([Copyright (C) 2003  Andrew Hsu])
-AC_REVISION($Revision$)
+AC_REVISION($Revision: 1.1 $)
 AC_CONFIG_SRCDIR([src/main.c])
+AC_CONFIG_HEADERS([config.h])
 
 # Checks for programs.
 AC_PROG_CC
 
 # Checks for libraries.
+AC_CHECK_LIB(vc, vc_new)
 
 # Checks for header files.
 AC_HEADER_STDC
