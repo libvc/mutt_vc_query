@@ -1,3 +1,11 @@
-mutt_vc_query 001 (2003-05-13)
+mutt_vc_query 001 (2003-05-14)
 
-* Initial release.
+* Initial release.  This is the same query_command utility that was
+included with previous versions of rolo.  The mutt_vc_query utility
+is now split-off into its own package.  The search results returned
+are now guaranteed to have a name and an email address.  The
+miscellaneous field can now be configured with the -t option.  The
+man page has been updated.  Note: for those who wish to compile
+mutt_vc_query from the source, it is now dependent on libvc.  So,
+be sure libvc is installed on your system before compiling
+mutt_vc_query.
