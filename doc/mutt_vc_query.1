@@ -1,0 +1,48 @@
+.\" Process this file with
+.\" groff -man -Tascii mutt_vc_query.1
+.\" $Id$
+.Dd May 13, 2003
+.Os
+.Dt MUTT_VC_QUERY 1
+.Sh NAME
+.Nm mutt_vc_query
+.Nd vCard query utility for mutt
+.Sh SYNOPSIS
+.Nm mutt_vc_query
+.Oo
+.Fl m |
+.Fl e
+.Oc
+.Op Fl f Ar datafile
+.Ar query
+.Nm mutt_vc_query
+.Op Fl v
+.Nm mutt_vc_query
+.Op Fl V
+.Sh DESCRIPTION
+A vCard query utility for mutt.
+.Pp
+The options are as follows:
+.Bl -tag -offset indent -width "-V"
+.It -m
+Sort the results by the miscellaneous field.
+.It -e
+Sort the results by email.
+.It -f
+Use the datafile to perform the query.
+.It -v
+Display the version.
+.It -V
+Display the copyright and license.
+.El
+.Sh FILES
+.Bl -tag -width "~/.rolo/contacts.vcf" -compact
+.It Pa ~/.rolo/contacts.vcf
+Default data file that mutt_vc_query will query.
+.Sh SEE ALSO
+.Xr muttrc 5 ,
+.Xr rolo 1
+.Sh AUTHORS
+.An "Andrew Hsu" Aq ahsu@users.sf.net
+.Sh BUGS
+Man page is not finished yet.
