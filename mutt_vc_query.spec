@@ -1,5 +1,5 @@
 # RPM spec file for Red Hat Linux
-# $Id$
+# $Id: mutt_vc_query.spec,v 1.1 2003/05/18 23:14:50 ahsu Exp $
 Summary: A vCard query utility for mutt.
 Name: mutt_vc_query
 Version: 002
@@ -12,6 +12,8 @@ Distribution: Red Hat Linux
 Vendor: Andrew Hsu
 Group: Applications/Productivity
 BuildRoot: %{_tmppath}/%{name}-buildroot
+BuildRequires: libvc
+Prefix: /usr
 
 %description
 This utility is intended to be used with mutt(1) and rolo(1). This
@@ -22,7 +24,7 @@ been stored by rolo.
 %setup -q
 
 %build
-./configure --bindir=/usr/bin --mandir=/usr/share/man
+./configure --prefix=/usr --mandir=/usr/share/man
 make
 
 %install
@@ -34,6 +36,6 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(-,root,root)
-%{_bindir}/mutt_vc_query
-%{_mandir}/man1/mutt_vc_query.1*
+%{_bindir}/*
+%{_mandir}/man1/*
 %doc AUTHORS COPYING ChangeLog INSTALL NEWS README THANKS
