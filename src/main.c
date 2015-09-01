@@ -46,6 +46,7 @@ char *query_string = NULL;
 char datafile[PATH_MAX];
 char *misc_field = NULL;
 int sort_by = 0;
+int all_emails = 0;
 
 /***************************************************************************
     Sets the default settings.
@@ -78,7 +79,7 @@ process_command_line_args (int argc, char *const *argv)
 
   progname = argv[0];
 
-  while (-1 != (ch = getopt (argc, argv, "f:met:vVh")))
+  while (-1 != (ch = getopt (argc, argv, "f:amet:vVh")))
     {
       switch (ch)
         {
@@ -90,6 +91,9 @@ process_command_line_args (int argc, char *const *argv)
           break;
         case 'e':
           sort_by = SORT_RESULTS_BY_EMAIL;
+          break;
+        case 'a':
+          all_emails = 1;
           break;
         case 't':
           misc_field = strdup (optarg);
@@ -174,7 +178,7 @@ display_license ()
 static void
 display_usage (const char *prog_name)
 {
-  printf ("usage: %s [-e|-m] [-t <type>] [-f <file>] query_string\n",
+  printf ("usage: %s [-e|-m|-a] [-t <type>] [-f <file>] query_string\n",
           prog_name);
   printf ("       %s -v\n", prog_name);
   printf ("       %s -V\n", prog_name);
@@ -182,6 +186,7 @@ display_usage (const char *prog_name)
   printf ("options:\n");
   printf ("  -e            sort results by email\n");
   printf ("  -m            sort results by misc\n");
+  printf ("  -a            output all emails instead of just preferred email\n");
   printf ("  -f <file>     specify a data file to use\n");
   printf ("  -t <type>     the type to use for the misc field\n");
   printf ("  -v            display version\n");
@@ -214,7 +219,7 @@ main (int argc, char *argv[])
     }
 
   printf ("Searching database ... ");
-  get_results (fp, query_string, misc_field, &searched, results, &rc);
+  get_results (fp, query_string, misc_field, all_emails, &searched, results, &rc);
 
   if (0 == rc)
     {

@@ -1,7 +1,7 @@
 /*
  *  mutt_vc_query - vCard query utility for mutt
  *  Copyright (C) 2003  Andrew Hsu
- * 
+ *
  *  This program is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU General Public License as
  *  published by the Free Software Foundation; either version 2 of
@@ -30,7 +30,10 @@ enum sort_results_by
 /*** PROTOTYPES ***/
 query_result *create_query_result ();
 void delete_query_result (query_result * qr);
-void get_results (FILE * fp, const char *query_string, const char *misc_field,
+void get_results (FILE * fp,
+                  const char *query_string,
+                  const char *misc_field,
+                  const int all_emails,
                   int *searched, query_result * results, int *rc);
 void sort_results (query_result * results, int n, int sort_by);
 void print_results (const query_result * results);

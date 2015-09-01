@@ -45,6 +45,12 @@ static int cmp_results_by_email (const void *a, const void *b);
 static int cmp_results_by_misc (const void *a, const void *b);
 static int strstr_nocase (const char *haystack, const char *needle);
 static char *get_misc_value (vc_component * vcard, const char *type_name);
+static query_result * add_result (const char *query_string,
+                                  const char *name,
+                                  const char *misc_value,
+                                  const char *email,
+                                  query_result * results,
+                                  int *rc);
 
 /*** STATIC FUNCTIONS ***/
 
@@ -252,6 +258,40 @@ get_misc_value (vc_component * vcard, const char *type_name)
   return ret_val;
 }
 
+/***************************************************************************
+    Adds a result to the results list if it matches
+    results arg is where to add the new result to
+    return value is a pointer to where to add the next result
+ */
+
+static query_result *
+add_result (const char *query_string,
+            const char *name,
+            const char *misc_value,
+            const char *email,
+            query_result * results,
+            int *rc)
+  {
+    query_result *r = results;
+    if (name != NULL && email != NULL)
+      {
+        /* perform the query using name, email, and misc fields */
+        if (strstr_nocase (name, query_string)
+            || strstr_nocase (email, query_string)
+            || strstr_nocase (misc_value, query_string))
+          {
+            r->next = create_query_result ();
+            r = r->next;
+            r->name = strdup (name);
+            r->email = strdup (email);
+            r->misc = strdup (misc_value);
+            (*rc)++; /* increment results counter */
+          }
+      }
+    return r;
+  }
+
+
 /*** EXTERNAL FUNCTIONS ***/
 
 /***************************************************************************
@@ -300,16 +340,19 @@ delete_query_result (query_result * qr)
  */
 
 void
-get_results (FILE * fp, const char *query_string, const char *misc_field,
+get_results (FILE * fp,
+             const char *query_string,
+             const char *misc_field,
+             const int all_emails,
              int *searched, query_result * results, int *rc)
 {
   vc_component *v = NULL;
   char *s_result = NULL;
-  query_result *r = NULL;
   char *email = NULL;
   char *name = NULL;
   char *misc = NULL;
   vc_component *fn = NULL;
+  query_result * r = NULL;
 
   r = results;
   *rc = 0;
@@ -319,26 +362,24 @@ get_results (FILE * fp, const char *query_string, const char *misc_field,
       (*searched)++;
       fn = vc_get_next_by_name (v, VC_FORMATTED_NAME);
       name = vc_get_value (fn);
-      email = vc_get_preferred_email (v);
-
-      if (NULL != name && NULL != email)
+      misc = get_misc_value (v, misc_field);
+      if (all_emails)
         {
-          misc = get_misc_value (v, misc_field);
-
-          /* perform the query using name, email, and misc fields */
-          if (strstr_nocase (name, query_string)
-              || strstr_nocase (email, query_string)
-              || strstr_nocase (misc, query_string))
+          for (fn = vc_get_next_by_name (v, VC_EMAIL);
+               NULL != fn;
+               fn = vc_get_next_by_name(fn, VC_EMAIL))
             {
-              r->next = create_query_result ();
-              r = r->next;
-              r->name = strdup (name);
-              r->email = strdup (email);
-              r->misc = misc;   /* because this is already malloc'ed */
-              (*rc)++;          /* increment results counter */
+              email = vc_get_value (fn);
+              r = add_result(query_string, name, misc, email, r, rc);
             }
         }
+      else
+        {
+          email = vc_get_preferred_email (v);
+          r = add_result(query_string, name, misc, email, r, rc);
+        }
 
+      free (misc);
       vc_delete_deep (v);
       v = NULL;
     }
