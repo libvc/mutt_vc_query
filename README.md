@@ -11,9 +11,16 @@ Original read me file provided in README.
 
 ## Compilation
 
+    autoreconf -f -i
     ./configure
     make
     make install
+
+Note: if making changes, use
+
+    git update-index --assume-unchanged INSTALL
+
+to avoid automatic changes to INSTALL making it into the git history.
 
 ## Usage
 
