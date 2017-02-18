@@ -18,3 +18,5 @@ install-sh
 missing
 mkinstalldirs
 stamp-h1
+compile
+src/*.o
