@@ -1,7 +1,8 @@
-*core
-*~
-*.swp
-.deps
-Makefile
-Makefile.in
-mutt_vc_query
+/*core
+/*~
+/*.swp
+/.deps
+/Makefile
+/Makefile.in
+/*.o
+/mutt_vc_query

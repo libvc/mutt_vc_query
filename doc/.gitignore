@@ -1,5 +1,2 @@
-*core
-*~
-*.swp
-Makefile
-Makefile.in
+/Makefile
+/Makefile.in
