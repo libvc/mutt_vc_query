@@ -1,3 +1,8 @@
+mutt_vc_query 004 (2017-02-18)
+
+* Add the unit test script test/test_mutt_vc_query.sh, as well as
+provisions for running it through "make check".
+
 mutt_vc_query 003 (2017-02-18)
 
 * Add -a option to output all email addresses instead of just the
