@@ -1,6 +1,6 @@
 # mutt_vc_query
 
-Query vcard file in mutt, using query_command.  Fork of mutt_vc_query, part of
+Query vcard file in mutt, using query command.  Fork of mutt\_vc\_query, part of
 the [Rolo](http://rolo.sourceforge.net/) project, which seems abandoned.
 
 Original read me file provided in README.
