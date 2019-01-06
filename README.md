@@ -22,6 +22,12 @@ Note: if making changes, use
 
 to avoid automatic changes to INSTALL making it into the git history.
 
+## Test
+
+For runing the unit test suite:
+
+    make check
+
 ## Usage
 
     mutt_vc_query -f <path to .vcf> <query>

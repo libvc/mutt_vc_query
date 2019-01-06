@@ -25,5 +25,5 @@ AC_C_CONST
 AC_FUNC_MALLOC
 AC_CHECK_FUNCS([strdup])
 
-AC_CONFIG_FILES([Makefile src/Makefile doc/Makefile])
+AC_CONFIG_FILES([Makefile src/Makefile doc/Makefile test/Makefile])
 AC_OUTPUT
