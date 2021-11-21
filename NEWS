@@ -1,3 +1,8 @@
+mutt_vc_query 005 (2021-11-21)
+
+* In src/result.c, Avoid implicit declaration of function tolower() by
+including ctype.h.
+
 mutt_vc_query 004 (2017-02-18)
 
 * Add the unit test script test/test_mutt_vc_query.sh, as well as

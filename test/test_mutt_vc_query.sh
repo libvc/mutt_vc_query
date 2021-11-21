@@ -88,7 +88,7 @@ test_mutt_vc_query_help_option() {
 
 ### Check call with -v option
 test_mutt_vc_query_version_option() {
-    assertEquals "mutt_vc_query 004" "$($MUTT_VC_QUERY -v)"
+    assertEquals "mutt_vc_query 005" "$($MUTT_VC_QUERY -v)"
 }
 
 ### Check call with -V option
