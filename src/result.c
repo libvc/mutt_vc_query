@@ -24,6 +24,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <vc.h>
+#include <ctype.h>
 
 #if HAVE_CONFIG_H
 #include "config.h"
