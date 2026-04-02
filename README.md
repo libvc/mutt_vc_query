@@ -5,9 +5,10 @@ the [Rolo](http://rolo.sourceforge.net/) project, which seems abandoned.
 
 Original read me file provided in README.
 
-## Depends
+## Dependencies
 
 * [libvc](http://rolo.sourceforge.net/)
+* shunit2 (for the unit tests)
 
 ## Compilation
 
