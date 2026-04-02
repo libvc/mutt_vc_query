@@ -15,9 +15,6 @@ AC_PROG_CC
 # Checks for libraries.
 AC_CHECK_LIB(vc, vc_new)
 
-# Checks for header files.
-AC_HEADER_STDC
-
 # Checks for typedefs, structures, and compiler characteristics.
 AC_C_CONST
 
