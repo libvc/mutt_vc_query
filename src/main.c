@@ -59,10 +59,10 @@ set_defaults ()
 
   home = getenv ("HOME");
   strcpy (datafile, home);
-  strncat (datafile, "/", 1);
-  strncat (datafile, DEFAULT_HOME_ROLO_DIR, strlen (DEFAULT_HOME_ROLO_DIR));
-  strncat (datafile, "/", 1);
-  strncat (datafile, DEFAULT_FILENAME, strlen (DEFAULT_FILENAME));
+  strcat (datafile, "/");
+  strcat (datafile, DEFAULT_HOME_ROLO_DIR);
+  strcat (datafile, "/");
+  strcat (datafile, DEFAULT_FILENAME);
 
   sort_by = SORT_RESULTS_BY_NAME;
 }
