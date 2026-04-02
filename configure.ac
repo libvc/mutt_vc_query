@@ -3,7 +3,7 @@
 
 AC_INIT(mutt_vc_query, 005, rafael@laboissiere.net)
 AM_INIT_AUTOMAKE
-AC_PREREQ(2.57)
+AC_PREREQ([2.72])
 AC_COPYRIGHT([Copyright (C) 2003  Andrew Hsu])
 AC_REVISION($Revision: 1.2 $)
 AC_CONFIG_SRCDIR([src/main.c])
