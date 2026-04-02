@@ -1,7 +1,7 @@
 # Process this file with autoconf to produce a configure script.
 # $Id: configure.ac,v 1.2 2003/05/13 12:42:51 ahsu Rel $
 
-AC_INIT([mutt_vc_query],[005],[rafael@laboissiere.net])
+AC_INIT([mutt_vc_query],[006],[rafael@laboissiere.net])
 AM_INIT_AUTOMAKE
 AC_PREREQ([2.72])
 AC_COPYRIGHT([Copyright (C) 2003  Andrew Hsu])
