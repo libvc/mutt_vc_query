@@ -1,3 +1,11 @@
+mutt_vc_query 006 (2026-04-02)
+
+* Code: Use strcat instead of strncat.
+* Configuration: Drop obsolete AC_HEADER_STDC, and bump AC_PREREQ to
+  version 2.72.
+* Documentation: Mention shunit2 as a dependency for running the unit
+  tests
+
 mutt_vc_query 005 (2021-11-21)
 
 * In src/result.c, Avoid implicit declaration of function tolower() by
